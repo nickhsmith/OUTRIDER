@@ -19,7 +19,7 @@ installIfReq <- function(p, type=BTYPE, Ncpus=NCPUS, ...){
 # install Bioconductor dependent on the R version
 print_log(paste(R.Version()[c("major", "minor")], collapse="."))
 print_log("Install BiocManager")
-install.packages("BiocManager", Ncpus=NCPUS)
+install.packages("BiocManager", Ncpus=NCPUS, repo="http://cran.rstudio.com/")
 INSTALL <- BiocManager::install
 
 # because of https://github.com/r-windows/rtools-installer/issues/3
