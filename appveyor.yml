@@ -9,9 +9,9 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-  - ps: Bootstrap
-  - ps: curl --silent -o ../local323.zip -L https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip
+  - ps: curl --silent -o ../local323.zip https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip
   - ps: unzip ../local323.zip
+  - ps: Bootstrap
   - ps: R -e "list.files('..'); list.files('.')"
   # install ImageMagick and set path correctly at first position
   # only needed for building the vignette
