@@ -19,6 +19,7 @@ install:
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
   - ps: Bootstrap
   - ps: bash -c ("which R")
+  - ps: bash -c ("ls -la /c/R/")
 #  - ps: sed \i "s/LOCAL_SOFT.*/LOCAL_SOFT = C:\projects\\nLIB_XML = C:\projects\\n/" "C:\R\etc\i386\Makeconf"
   - ps: bash -c ("R -e 'file.path(R.home(component=" + '"home"), "etc", "i386")' + "'")
   - ps: bash -c ("R -e `"list.files(file.path(R.home(component='home'), 'etc', 'i386'))`"")
