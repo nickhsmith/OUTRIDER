@@ -12,10 +12,10 @@ install:
   - ps: Invoke-WebRequest https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -OutFile "..\local323.zip"
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
   - ps: Bootstrap
-  - ps: ls "C:\"
+  - ps: ls "C:\Users\"
   - ps: ls "C:\R\etc\i386\"
-  - ps: ls "C:\R\etc\x86\"
-  - ps: cat "C:\R\etc\i386\makeconf"
+  - ps: ls "C:\R\etc\x64\"
+  - ps: cat "C:\R\etc\i386\Makeconf"
 # C:/R/etc/i386/Makeconf
   #ram files/R/r version/etc/x64 and i386 with the following lines added:
 #
