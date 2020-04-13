@@ -14,10 +14,12 @@ install:
   - ps: Bootstrap
   - ps: bash -c ("which R")
   - ps: bash -c ("ls -la /c/R/etc/")
-  - ps: bash -c ("ls -la /c/R/etc/i368/")
+  - ps: bash -c ("ls -la /c/R/etc/i386/")
   - ps: bash -c ("ls -la /c/R/etc/x64/")
   - ps: bash -c ("cat /c/R/etc/x64/Makeconf")
-
+  - ps: bash -c ("sed -e 's|.*LOCAL_SOFT.*|LOCAL_SOFT = C:\projects\\nLIB_XML = C:\projects\\n|' -i /c/R/etc/x64/Makeconf")
+  - ps: bash -c ("cat /c/R/etc/x64/Makeconf")
+  
 #  - ps: echo "$env:APPVEYOR_BUILD_FOLDER"
 #  - ps: ls "C:\projects\"
 #  - ps: cat "C:\projects\appveyor-tool.ps1"
