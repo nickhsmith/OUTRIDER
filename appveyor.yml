@@ -9,14 +9,14 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-  - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:/projects \n LIB_XML = C:projects |' -i ../appveyor-tool.ps1")
+    #  - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:/projects \nLIB_XML = C:projects |' -i ../appveyor-tool.ps1")
   - ps: Invoke-WebRequest https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -OutFile "..\local323.zip"
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
   - ps: Bootstrap
   - ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/i386/Makeconf")
   - ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/x64/Makeconf")
-  - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:\/projects \nLIB_XML = C:projects/ |' -i /c/R/etc/x64/Makeconf")
-  - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:projects \nLIB_XML = C:projects |' -i /c/R/etc/i386/Makeconf")
+  - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:/projects/ \nLIB_XML = C:/projects/ |' -i /c/R/etc/x64/Makeconf")
+  - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:/projects/ \nLIB_XML = C:/projects/ |' -i /c/R/etc/i386/Makeconf")
   - ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/x64/Makeconf")
   
 #  - ps: bash -c ("which R")
