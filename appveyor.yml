@@ -11,11 +11,11 @@ init:
 install:
   - ps: Invoke-WebRequest https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -OutFile "..\local323.zip"
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
-  - ps: choco install --limitoutput curl
+  - ps: choco install curl
   - ps: Invoke-WebRequest https://curl.haxx.se/download/curl-7.69.1.zip -OutFile "../curl.zip"
   - ps: bash -c ('unzip -q -d ../ ../curl.zip "curl-7.69.1/include/" ')
   - ps: bash -c ("cp -r ../curl-7.69.1/include ../include")
-  - ps: bash -c ("ls -la ../include ../ ../curl-7.96.1/include")
+  - ps: bash -c ("ls -la ../include ../ ../curl-7.69.1/include")
   - ps: bash -c ("ls -la ../include/curl")
   - ps: Bootstrap
   - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:\/projects\nLIB_XML = C:\/projects|' -i /c/R/etc/x64/Makeconf")
