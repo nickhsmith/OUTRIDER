@@ -10,11 +10,12 @@ init:
 
 install:
   - ps: echo "$env:APPVEYOR_BUILD_FOLDER"
-  - ps: ls "C:\project\"
+  - ps: ls "C:\projects\"
   - ps: Invoke-WebRequest https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -OutFile "..\local323.zip"
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
   - ps: Bootstrap
   - ps: ls "C:\Users\appveyor\"
+  - ps: sed \i "C:\R\etc\i386\Makeconf" "s/LOCAL_SOFT.*/LOCAL_SOFT = C:\projects\\nLIB_XML = C:\projects\\n/"
   - ps: cat "C:\R\etc\i386\Makeconf"
   - ps: cat "C:\R\etc\x64\Makeconf"
 #LOCAL_SOFT = c:/extsoft
