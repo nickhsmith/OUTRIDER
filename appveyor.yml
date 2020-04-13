@@ -13,7 +13,7 @@ install:
   - ps: bash -c ("pwd")
   - ps: bash -c ("unzip -d ../ ../local323.zip")
   - ps: Bootstrap
-  - ps: bash -c ('ls -la ../ /')
+  - ps: bash -c ('ls -la ../ / /c/')
   - ps: cat /R/etc/**/makeconf
   #ram files/R/r version/etc/x64 and i386 with the following lines added:
 #
@@ -50,14 +50,14 @@ environment:
     - R_VERSION: 3.6.0
       
 build_script:
-  - travis-tool.sh install_bioc rlang BiocManager
-  - Rscript setupEnv.R
+  - travis-tool.sh install_bioc rlang BiocManager XML
+#  - Rscript setupEnv.R
 
 test_script:
     - R CMD build --no-build-vignettes .
-    - R CMD check --install-args=--build --no-vignettes --no-manual --timings *tar.gz
-    - R -e "BiocCheck::BiocCheck(list.files(path='.', pattern='.tar.gz'))"
-    - R -e "devtools::run_examples(document=FALSE)"
+#    - R CMD check --install-args=--build --no-vignettes --no-manual --timings *tar.gz
+#    - R -e "BiocCheck::BiocCheck(list.files(path='.', pattern='.tar.gz'))"
+#    - R -e "devtools::run_examples(document=FALSE)"
     # runs currently into an error saying: "LaTeX Error: Missing \begin{document}."
     #    - cd vignettes && R CMD Sweave --engine=knitr::knitr --pdf OUTRIDER.Rnw
 
