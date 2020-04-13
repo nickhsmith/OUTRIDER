@@ -12,7 +12,8 @@ install:
   - ps: echo "$env:APPVEYOR_BUILD_FOLDER"
   - ps: ls "C:\projects\"
   - ps: cat "C:\projects\appveyor-tool.ps1"
-  - ps: sed \i "s/LOCAL_SOFT.*/LOCAL_SOFT = C:\projects\\nLIB_XML = C:\projects\\n/" "C:\projects\appveyor-tool.ps1"
+  - ps: sed -i -e "s|.*MikTex.*|LOCAL_SOFT = C:\projects\LIB_XML = C:\projects\|" "C:\projects\appveyor-tool.ps1"
+  - ps: sed \i \e "s|.*MikTex.*|LOCAL_SOFT = C:\projects\LIB_XML = C:\projects\|" "C:\projects\appveyor-tool.ps1"
   - ps: cat "C:\projects\appveyor-tool.ps1"
   - ps: Invoke-WebRequest https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -OutFile "..\local323.zip"
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
