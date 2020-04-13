@@ -13,7 +13,7 @@ install:
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
   - ps: choco install --no-progress curl
   - ps: Invoke-WebRequest https://curl.haxx.se/download/curl-7.69.1.zip -OutFile "../curl.zip"
-  - ps: bash -c ('unzip -d ../ ../curl.zip "curl-7.69.1/include" ')
+  - ps: bash -c ('unzip -d ../ ../curl.zip "curl-7.69.1/include/*" ')
   - ps: bash -c ("cp -r ../curl-7.69.1/include ../include")
   - ps: bash -c ("ls -la ../include ../ ../curl-7.69.1/include")
   - ps: bash -c ("ls -la ../include/curl")
