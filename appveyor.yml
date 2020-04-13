@@ -9,12 +9,14 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
+  - ps: ls -la "C:\"
   - ps: Invoke-WebRequest https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -OutFile "..\local323.zip"
   - ps: bash -c ("pwd")
   - ps: bash -c ("unzip -d ../ ../local323.zip")
   - ps: Bootstrap
-  - ps: bash -c ('ls -la ../ / /c/')
-  - ps: cat /R/etc/**/makeconf
+  - ps: bash -c ('ls -la ../ /')
+  - ps: cat /c/R/etc/i386/makeconf
+# C:/R/etc/i386/Makeconf
   #ram files/R/r version/etc/x64 and i386 with the following lines added:
 #
 #LOCAL_SOFT = c:/extsoft
