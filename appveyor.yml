@@ -13,12 +13,13 @@ install:
   - ps: Invoke-WebRequest https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -OutFile "..\local323.zip"
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
   - ps: Bootstrap
-  - ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/i386/Makeconf")
-  - ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/x64/Makeconf")
   - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:\/projects\nLIB_XML = C:\/projects|' -i /c/R/etc/x64/Makeconf")
   - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:\/projects\nLIB_XML = C:\/projects|' -i /c/R/etc/i386/Makeconf")
-  - ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/x64/Makeconf")
-  - ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/i386/Makeconf")
+  
+  #- ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/i386/Makeconf")
+  #- ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/x64/Makeconf")
+  #- ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/x64/Makeconf")
+  #- ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/i386/Makeconf")
   
 #  - ps: bash -c ("which R")
 #  - ps: bash -c ("ls -la /c/R/etc/")
@@ -63,18 +64,18 @@ environment:
 #      BIOC_USE_DEVEL: TRUE
 #      GCC_PATH: mingw_32
 #      R_ARCH: i386    
-#    - R_VERSION: release
-#    - R_VERSION: 3.6.0
+    - R_VERSION: release
+    - R_VERSION: 3.6.0
       
 build_script:
   - travis-tool.sh install_bioc rlang BiocManager XML
-#  - Rscript setupEnv.R
+  - Rscript setupEnv.R
 
 test_script:
     - R CMD build --no-build-vignettes .
-#    - R CMD check --install-args=--build --no-vignettes --no-manual --timings *tar.gz
-#    - R -e "BiocCheck::BiocCheck(list.files(path='.', pattern='.tar.gz'))"
-#    - R -e "devtools::run_examples(document=FALSE)"
+    - R CMD check --install-args=--build --no-vignettes --no-manual --timings *tar.gz
+    - R -e "BiocCheck::BiocCheck(list.files(path='.', pattern='.tar.gz'))"
+    - R -e "devtools::run_examples(document=FALSE)"
     # runs currently into an error saying: "LaTeX Error: Missing \begin{document}."
     #    - cd vignettes && R CMD Sweave --engine=knitr::knitr --pdf OUTRIDER.Rnw
 
