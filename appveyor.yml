@@ -9,17 +9,18 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-  - ps: echo "$env:APPVEYOR_BUILD_FOLDER"
-  - ps: ls "C:\projects\"
-  - ps: cat "C:\projects\appveyor-tool.ps1"
-  - ps: sed -i -e "s|.*MikTex.*|LOCAL_SOFT = C:\projects\LIB_XML = C:\projects\|" "C:\projects\appveyor-tool.ps1"
-  - ps: sed \i \e "s|.*MikTex.*|LOCAL_SOFT = C:\projects\LIB_XML = C:\projects\|" "C:\projects\appveyor-tool.ps1"
-  - ps: cat "C:\projects\appveyor-tool.ps1"
+#  - ps: echo "$env:APPVEYOR_BUILD_FOLDER"
+#  - ps: ls "C:\projects\"
+#  - ps: cat "C:\projects\appveyor-tool.ps1"
+#  - ps: sed -i -e "s|.*MikTex.*|LOCAL_SOFT = C:\projects\LIB_XML = C:\projects\|" "C:\projects\appveyor-tool.ps1"
+#  - ps: sed \i \e "s|.*MikTex.*|LOCAL_SOFT = C:\projects\LIB_XML = C:\projects\|" "C:\projects\appveyor-tool.ps1"
+#  - ps: cat "C:\projects\appveyor-tool.ps1"
   - ps: Invoke-WebRequest https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -OutFile "..\local323.zip"
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
   - ps: Bootstrap
-  - ps: ls "C:\Users\appveyor\"
-  - ps: sed \i "s/LOCAL_SOFT.*/LOCAL_SOFT = C:\projects\\nLIB_XML = C:\projects\\n/" "C:\R\etc\i386\Makeconf"
+#  - ps: sed \i "s/LOCAL_SOFT.*/LOCAL_SOFT = C:\projects\\nLIB_XML = C:\projects\\n/" "C:\R\etc\i386\Makeconf"
+  - ps: bash -c ('R -e \'file.path(R.home(component="home"), "etc", "i386")\'')
+  - ps: bash -c ('R -e \'list.files(file.path(R.home(component="home"), "etc", "i386")\')')
   - ps: cat "C:\R\etc\i386\Makeconf"
   - ps: cat "C:\R\etc\x64\Makeconf"
 #LOCAL_SOFT = c:/extsoft
