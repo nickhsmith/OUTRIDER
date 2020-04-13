@@ -9,34 +9,16 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-    #  - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:/projects \nLIB_XML = C:projects |' -i ../appveyor-tool.ps1")
   - ps: Invoke-WebRequest https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -OutFile "..\local323.zip"
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
+  - ps: choco install curl libcurl
+  - ps: Invoke-WebRequest https://curl.haxx.se/download/curl-7.69.1.zip -OutFile "../curl.zip"
+  - ps: bash -c ('unzip -q -d ../ ../curl.zip "curl-*/include/*.h" ')
+  - ps: bash -c ("rsync -ar '../curl*/include/' '../include'")
   - ps: Bootstrap
   - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:\/projects\nLIB_XML = C:\/projects|' -i /c/R/etc/x64/Makeconf")
   - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:\/projects\nLIB_XML = C:\/projects|' -i /c/R/etc/i386/Makeconf")
-  
-  #- ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/i386/Makeconf")
-  #- ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/x64/Makeconf")
-  #- ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/x64/Makeconf")
-  #- ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/i386/Makeconf")
-  
-#  - ps: bash -c ("which R")
-#  - ps: bash -c ("ls -la /c/R/etc/")
-#  - ps: echo "$env:APPVEYOR_BUILD_FOLDER"
-#  - ps: ls "C:\projects\"
-#  - ps: cat "C:\projects\appveyor-tool.ps1"
-#  - ps: sed -i -e "s|.*MikTex.*|LOCAL_SOFT = C:\projects\LIB_XML = C:\projects\|" "C:\projects\appveyor-tool.ps1"
-#  - ps: sed \i \e "s|.*MikTex.*|LOCAL_SOFT = C:\projects\LIB_XML = C:\projects\|" "C:\projects\appveyor-tool.ps1"
-#  - ps: cat "C:\projects\appveyor-tool.ps1"
 
-#  - ps: sed \i "s/LOCAL_SOFT.*/LOCAL_SOFT = C:\projects\\nLIB_XML = C:\projects\\n/" "C:\R\etc\i386\Makeconf"
-#  - ps: bash -c ("R -e 'file.path(R.home(component=" + '"home"), "etc", "i386")' + "'")
-#  - ps: bash -c ("R -e `"list.files(file.path(R.home(component='home'), 'etc', 'i386'))`"")
-#  - ps: cat "C:\R\etc\i386\Makeconf"
-#  - ps: cat "C:\R\etc\x64\Makeconf"
-#LOCAL_SOFT = c:/extsoft
-#LIB_XML = c:/extsoft
   # install ImageMagick and set path correctly at first position
   # only needed for building the vignette
   #- ps: InstallMiktex
@@ -68,7 +50,7 @@ environment:
     - R_VERSION: 3.6.0
       
 build_script:
-  - travis-tool.sh install_bioc rlang BiocManager XML
+  - travis-tool.sh install_bioc rlang BiocManager XML Rcurl
   - Rscript setupEnv.R
 
 test_script:
