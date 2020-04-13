@@ -9,8 +9,11 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-  - ps: curl https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -o ../local323.zip
-  - ps: bash -c ("curl -o ../local323.zip https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip")
+  - ps: bash -c ('ls -la')
+  - ps: bash -c ('curl -h')
+  - ps: bash -c ('ls -la C:/R/ ../ ./ C:/R/etc/')
+  # - ps: curl https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -o ../local323.zip
+  - ps: bash -c ("curl -o ../local323.zip -L https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip")
   - ps: bash -c ("unzip ../local323.zip")
   - ps: bash -c ("ls -la ../")
   - ps: Bootstrap
