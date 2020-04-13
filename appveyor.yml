@@ -9,7 +9,8 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-  - ps: echo "$APPVEYOR_BUILD_FOLDER"
+  - ps: echo "$env:$APPVEYOR_BUILD_FOLDER"
+  - ps: ls "C:\"
   - ps: Invoke-WebRequest https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -OutFile "..\local323.zip"
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
   - ps: Bootstrap
