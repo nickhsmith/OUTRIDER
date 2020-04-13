@@ -10,10 +10,9 @@ init:
 
 install:
   - ps: curl https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -o ../local323.zip
-  - ps: curl https://google.com --help
-  - ps: unzip ../local323.zip
   - ps: Bootstrap
   - ps: R -e "list.files('..'); list.files('.')"
+  - ps: unzip ../local323.zip
   # install ImageMagick and set path correctly at first position
   # only needed for building the vignette
   #- ps: InstallMiktex
