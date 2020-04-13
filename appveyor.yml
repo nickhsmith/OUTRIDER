@@ -9,7 +9,7 @@ init:
         Import-Module '..\appveyor-tool.ps1'
 
 install:
-  - ps: ls -la "C:\"
+  - ps: ls "C:\"
   - ps: Invoke-WebRequest https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip -OutFile "..\local323.zip"
   - ps: bash -c ("pwd")
   - ps: bash -c ("unzip -d ../ ../local323.zip")
