@@ -13,7 +13,7 @@ install:
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
   - ps: choco install curl
   - ps: Invoke-WebRequest https://curl.haxx.se/download/curl-7.69.1.zip -OutFile "../curl.zip"
-  - ps: bash -c ('unzip -q -d ../ ../curl.zip "curl-*/include/*.h" ')
+  - ps: bash -c ('unzip -q -d ../ ../curl.zip "curl-7.69.1/include/" ')
   - ps: bash -c ("rsync -ar '../curl*/include/' '../include'")
   - ps: Bootstrap
   - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:\/projects\nLIB_XML = C:\/projects|' -i /c/R/etc/x64/Makeconf")
