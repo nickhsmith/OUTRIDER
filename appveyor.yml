@@ -10,11 +10,10 @@ init:
 
 install:
   - ps: bash -c ("curl -s -o ../local323.zip https://www.stats.ox.ac.uk/pub/Rtools/goodies/multilib/local323.zip")
-  - ps: bash -c ('ls -la ../ ./ /')
-  - ps: bash -c ("unzip ../local323.zip")
-  - ps: bash -c ("ls -la ../")
+  - ps: bash -c ("unzip -d ../ ../local323.zip")
+  - ps: bash -c ('ls -la ../ ../lib/ /')
   - ps: Bootstrap
-  - ps: R "list.files('..'); list.files('.')"
+  - ps: bash -c ('ls -la /')
   # install ImageMagick and set path correctly at first position
   # only needed for building the vignette
   #- ps: InstallMiktex
