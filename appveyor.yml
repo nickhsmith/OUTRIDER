@@ -14,8 +14,8 @@ install:
   - ps: Bootstrap
   - ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/i386/Makeconf")
   - ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/x64/Makeconf")
-  - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:/projects/\nLIB_XML = C:/projects/\n|' -i /c/R/etc/x64/Makeconf")
-  - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:/projects/\nLIB_XML = C:/projects/\n|' -i /c/R/etc/i386/Makeconf")
+  - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:/projects/\\nLIB_XML = C:/projects/\\n|' -i /c/R/etc/x64/Makeconf")
+  - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:/projects/\\nLIB_XML = C:/projects/\\n|' -i /c/R/etc/i386/Makeconf")
   - ps: bash -c ("grep -C3 LOCAL_SOFT /c/R/etc/x64/Makeconf")
   
 #  - ps: bash -c ("which R")
@@ -28,10 +28,10 @@ install:
 #  - ps: cat "C:\projects\appveyor-tool.ps1"
 
 #  - ps: sed \i "s/LOCAL_SOFT.*/LOCAL_SOFT = C:\projects\\nLIB_XML = C:\projects\\n/" "C:\R\etc\i386\Makeconf"
-  - ps: bash -c ("R -e 'file.path(R.home(component=" + '"home"), "etc", "i386")' + "'")
-  - ps: bash -c ("R -e `"list.files(file.path(R.home(component='home'), 'etc', 'i386'))`"")
-  - ps: cat "C:\R\etc\i386\Makeconf"
-  - ps: cat "C:\R\etc\x64\Makeconf"
+#  - ps: bash -c ("R -e 'file.path(R.home(component=" + '"home"), "etc", "i386")' + "'")
+#  - ps: bash -c ("R -e `"list.files(file.path(R.home(component='home'), 'etc', 'i386'))`"")
+#  - ps: cat "C:\R\etc\i386\Makeconf"
+#  - ps: cat "C:\R\etc\x64\Makeconf"
 #LOCAL_SOFT = c:/extsoft
 #LIB_XML = c:/extsoft
   # install ImageMagick and set path correctly at first position
@@ -61,8 +61,8 @@ environment:
 #      BIOC_USE_DEVEL: TRUE
 #      GCC_PATH: mingw_32
 #      R_ARCH: i386    
-    - R_VERSION: release
-    - R_VERSION: 3.6.0
+#    - R_VERSION: release
+#    - R_VERSION: 3.6.0
       
 build_script:
   - travis-tool.sh install_bioc rlang BiocManager XML
