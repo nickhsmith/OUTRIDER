@@ -13,15 +13,15 @@ install:
   - ps: bash -c ("unzip -q -d ../ ../local323.zip")
   - ps: choco install --no-progress curl
   - ps: Invoke-WebRequest https://curl.haxx.se/download/curl-7.69.1.zip -OutFile "../curl.zip"
-  - ps: bash -c ('unzip -d ../ ../curl.zip "curl-7.69.1/include/curl/*" ')
+  - ps: bash -c ('unzip -q -d ../ ../curl.zip "curl-7.69.1/include/curl/*" ')
   - ps: bash -c ("cp -r ../curl-7.69.1/include/curl ../include")
-  - ps: bash -c ("ls -la ../include ../ ../curl-7.69.1/include")
-  - ps: bash -c ("ls -la ../include/curl")
   - ps: Bootstrap
   - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:\/projects\nLIB_XML = C:\/projects|' -i /c/R/etc/x64/Makeconf")
   - ps: bash -c ("sed -e 's|^LOCAL_SOFT.*|LOCAL_SOFT = C:\/projects\nLIB_XML = C:\/projects|' -i /c/R/etc/i386/Makeconf")
 
-  # install ImageMagick and set path correctly at first position
+#  - ps: bash -c ("ls -la ../include ../ ../curl-7.69.1/include")
+#  - ps: bash -c ("ls -la ../include/curl")
+   # install ImageMagick and set path correctly at first position
   # only needed for building the vignette
   #- ps: InstallMiktex
   #- choco install -y -PackageParameters LegacySupport=true imagemagick
@@ -52,7 +52,7 @@ environment:
     - R_VERSION: 3.6.0
       
 build_script:
-  - travis-tool.sh install_bioc rlang BiocManager XML RCurl
+  - travis-tool.sh install_bioc XML RCurl fs backport
   - Rscript setupEnv.R
 
 test_script:
